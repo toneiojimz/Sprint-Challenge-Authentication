@@ -1,3 +1,4 @@
+
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
@@ -9,6 +10,8 @@ const dbConnection = require("../database/dbConfig.js");
 const authRouter = require("../auth/auth-router.js");
 const jokesRouter = require("../jokes/jokes-router.js");
 const authenticate = require('../auth/authenticate-middleware.js');
+
+const usersRouter = require('../users/users-router.js');
 
 const server = express();
 
@@ -39,6 +42,7 @@ server.use(cors());
 
 server.use('/api/auth', authRouter);
 server.use('/api/jokes', authenticate, jokesRouter);
+server.use('/api/users', usersRouter);
 
 
 server.get("/", (req, res) => {
