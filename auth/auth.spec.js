@@ -35,5 +35,21 @@ describe('api tests', () => {
                     done();
                 })
         })
+
+        it('login should return json', async (done) => {
+            await api.add({ username: "one", password: "one" });
+
+            request(server)
+                .post('/api/auth/login')
+                .send({ username: "one", password: "one" })
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .end((err) => {
+                    if (err) return done(err);
+                    done();
+                })
+        })
+
+
     })
 })
